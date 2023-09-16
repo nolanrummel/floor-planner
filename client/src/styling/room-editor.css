@@ -3,8 +3,8 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    border: 2px solid #000;
-    /* background-color: red; */
+    border: 5px solid #CED8F7;
+    background-color: #4A6DE5;
 }
 
 .arrows-top-row {
@@ -35,10 +35,12 @@
 
 .scale-top-left-control:hover .up-left-arrow {
     transform: rotate(45deg) scale(1.5);
+    opacity: 1;
 }
 
 .up-left-arrow {
     margin-top: 0px;
+    opacity: .25;
     transform: rotate(45deg);
     transition: transform 0.3s ease-in-out;
     user-select: none;
@@ -72,9 +74,11 @@
 
 .up-arrow-container:hover .up-arrow {
     transform: rotate(90deg) scale(1.5);
+    opacity: 1;
 }
 
 .up-arrow {
+    opacity: .25;
     margin-bottom: 7px;
     transform: rotate(90deg);
     transition: transform 0.3s ease-in-out;
@@ -83,6 +87,7 @@
 }
 
 .up-arrow-active {
+    opacity: 1;
     margin-bottom: 7px;
     transform: rotate(90deg) scale(1.5);
     transition: transform 0.3s ease-in-out;
@@ -107,9 +112,11 @@
 
 .scale-top-right-control:hover .up-right-arrow {
     transform: rotate(135deg) scale(1.5);
+    opacity: 1;
 }
 
 .up-right-arrow {
+    opacity: .25;
     margin-top: 0px;
     transform: rotate(135deg);
     transition: transform 0.3s ease-in-out;
@@ -154,9 +161,11 @@
 
 .left-arrow-container:hover .left-arrow {
     transform: scale(1.5);
+    opacity: 1;
 }
 
 .left-arrow {
+    opacity: .25;
     transition: transform 0.3s ease-in-out;
     user-select: none;
     pointer-events: none;
@@ -209,9 +218,11 @@
 
 .right-arrow-container:hover .right-arrow {
     transform: rotate(180deg) scale(1.5);
+    opacity: 1;
 }
 
 .right-arrow {
+    opacity: .25;
     transform: rotate(180deg);
     transition: transform 0.3s ease-in-out;
     user-select: none;
@@ -257,9 +268,11 @@
 
 .scale-bottom-left-control:hover .down-left-arrow {
     transform: rotate(315deg) scale(1.5);
+    opacity: 1;
 }
 
 .down-left-arrow {
+    opacity: .25;
     margin-top: 0px;
     transform: rotate(315deg);
     transition: transform 0.3s ease-in-out;
@@ -294,9 +307,11 @@
 
 .down-arrow-container:hover .down-arrow {
     transform: rotate(270deg) scale(1.5);
+    opacity: 1;
 }
 
 .down-arrow {
+    opacity: .25;
     margin-top: 7px;
     transform: rotate(270deg);
     transition: transform 0.3s ease-in-out;
@@ -329,9 +344,11 @@
 
 .scale-bottom-right-control:hover .down-right-arrow {
     transform: rotate(225deg) scale(1.5);
+    opacity: 1;
 }
 
 .down-right-arrow {
+    opacity: .25;
     margin-top: 0px;
     transform: rotate(225deg);
     transition: transform 0.3s ease-in-out;
