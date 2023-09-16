@@ -1,0 +1,215 @@
+import React, { useState, useEffect, useRef } from "react"
+
+//local imports
+import "../styling/room-editor.css"
+
+const Room = ({ room, handleResize }) => {
+    const [isEditing, setIsEditing] = useState(false)
+    const [isDragging, setIsDragging] = useState(false)
+    const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
+
+    const divRef = useRef(null)
+
+    useEffect(() => {
+        if (divRef.current) {
+            const rect = divRef.current.getBoundingClientRect()
+            console.log(`X: ${rect.left}, Y: ${rect.top}`)
+        }
+    }, [room])
+
+    const handleMouseDown = (e) => {
+        setIsDragging(true)
+        setDragOffset({
+            x: e.clientX - room.x,
+            y: e.clientY - room.y
+        })
+    }
+
+    const handleMouseMove = (e) => {
+        if (!isDragging) return
+
+        const newLeft = e.clientX - dragOffset.x
+        const newTop = e.clientY - dragOffset.y
+
+        handleResize(room.id, { x: newLeft, y: newTop })
+    }
+
+    const handleMouseUp = () => {
+        setIsDragging(false)
+    }
+
+    return (
+        <div className="room-container">
+            <div className="room"
+                style={{
+                    width: room.width,
+                    height: room.height,
+                    left: room.x,
+                    top: room.y,
+                    cursor: 'move'
+                }}
+                onMouseOver={() => setIsEditing(true)}
+                onMouseOut={() => setIsEditing(false)}
+            >
+                {isEditing ? 
+                    <div>
+                        <div className="up-arrow"
+                            // onMouseDown={handleMouseDown}
+                            // onMouseMove={handleMouseMove}
+                            // onMouseUp={handleMouseUp}
+                        >
+                            up
+                        </div>
+                        <div className="left-arrow"
+                            // onMouseDown={handleMouseDown}
+                            // onMouseMove={handleMouseMove}
+                            // onMouseUp={handleMouseUp}
+                        >
+                            left
+                        </div>
+                        <div className="move-arrow"
+                            onMouseDown={handleMouseDown}
+                            onMouseMove={handleMouseMove}
+                            onMouseUp={handleMouseUp}
+                        >
+                            move
+                        </div>
+                        <div className="right-arrow"
+                            // onMouseDown={handleMouseDown}
+                            // onMouseMove={handleMouseMove('right')}
+                            // onMouseUp={handleMouseUp}
+                        >
+                            right
+                        </div>
+                        <div className="down-arrow"
+                            // onMouseDown={handleMouseDown}
+                            // onMouseMove={handleMouseMove('down')}
+                            // onMouseUp={handleMouseUp}
+                        >
+                            down
+                        </div>
+                    </div>
+                    :
+                    ''
+                }
+            </div>
+        </div>
+    )
+}
+
+export default Room
+
+// import React, { useState } from "react"
+
+// const Room = ({ room, handleResize }) => {
+//     const [isDragging, setIsDragging] = useState(false)
+//     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
+
+//     const handleMouseDown = (e) => {
+//         setIsDragging(true)
+//         setDragOffset({
+//             x: e.clientX - room.x,
+//             y: e.clientY - room.y
+//         })
+//     }
+
+//     const handleMouseMove = (e) => {
+//         if (!isDragging) return
+
+//         const newLeft = e.clientX - dragOffset.x
+//         const newTop = e.clientY - dragOffset.y
+
+//         const containterWidth = 400
+//         const containerHeight = 400
+//         const roomWidth = room.width
+//         const roomHeight = room.height
+
+//         const maxX = containterWidth - roomWidth
+//         const maxY = containerHeight - roomHeight
+
+//         const boundedLeft = Math.min(maxX, Math.max(0, newLeft))
+//         const boundedTop = Math.min(maxY, Math.max(0, newTop))
+
+//         handleResize(room.id, { x: boundedLeft, y: boundedTop })
+//         console.log(boundedLeft)
+//     }
+
+//     const handleMouseUp = () => {
+//         setIsDragging(false)
+//     }
+
+//     return (
+//         <div
+//             style={{
+//                 position: 'absolute',
+//                 border: '2px solid #000',
+//                 width: room.width,
+//                 height: room.height,
+//                 left: room.x,
+//                 top: room.y,
+//                 cursor: 'move'
+//             }}
+//             onMouseDown={handleMouseDown}
+//             onMouseMove={handleMouseMove}
+//             onMouseUp={handleMouseUp}
+//         >
+//             <div className="resize-handle-right"/>
+//             <div className="resize-handle-bottom"/>
+//         </div>
+//     )
+// }
+
+// export default Room
+
+// import React from "react"
+// import { useDrag } from "react-dnd"
+
+// const Room = ({ room, onResize }) => {
+//     const [, drag] = useDrag({
+//         type: 'ROOM',
+//         item: { id: room.id }
+//     })
+
+//     const handleResize = (e, dir) => {
+//         const { width, height, x, y } = room
+//         let newWidth = width
+//         let newHeight = height
+
+//         console.log(dir)
+
+//         if (dir === 'right') {
+//             newWidth += e.movementX
+//             console.log('right')
+//         } else if (dir === 'bottom') {
+//             newHeight += e.movementY
+//             console.log('bottom')
+//         }
+
+//         onResize(room.id, { x, y, width: newWidth, height: newHeight })
+//     }
+//     return (
+//         <div
+//             ref={drag}
+//             style={{
+//                 position: 'absolute',
+//                 border: '2px solid #000',
+//                 width: room.width,
+//                 height: room.height,
+//                 left: room.x,
+//                 top: room.y,
+//                 cursor: 'move'
+//             }}
+//         >
+//             <div
+//                 className="resize-handle-right"
+//                 onMouseDown={(e) => handleResize(e, 'right')}
+//             />
+//             <div
+//                 className="resize-handle-bottom"
+//                 onMouseDown={(e) => handleResize(e, 'bottom')}
+//             />
+//         </div>
+//     )
+// }
+
+// export default Room

@@ -1,0 +1,186 @@
+// const Room = ({ room, handleResize }) => {
+//     const [isEditing, setIsEditing] = useState(false)
+//     const [isDragging, setIsDragging] = useState(false)
+//     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
+//     const [heightChange, setHeightChange] = useState('')
+//     const [widthChange, setWidthChange] = useState('')
+//     const [roomDimensions, setRoomDimensions] = useState({})
+
+// const divRef = useRef(null)
+
+    // useEffect(() => {
+    //     if (divRef.current) {
+    //         const rect = divRef.current.getBoundingClientRect()
+    //     }
+    // }, [room, handleResize])
+
+    // useEffect(() => {
+    //     setInitialDimensions({
+    //         width: room.width,
+    //         height: room.height,
+    //         x: room.x,
+    //         y: room.y
+    //     })
+    // }, [room])
+
+//     const divRef = useRef(null)
+
+//     useEffect(() => {
+//         if (divRef.current) {
+//             const rect = divRef.current.getBoundingClientRect()
+//             setRoomDimensions(rect)
+//         }
+//     }, [room])
+
+//     const handleMouseDown = (e) => {
+//         setIsDragging(true)
+//         setDragOffset({
+//             x: e.clientX - room.x,
+//             y: e.clientY - room.y
+//         })
+//     }
+
+//     const handleMouseMove = (e) => {
+//         if (!isDragging) return
+
+//         const newLeft = e.clientX - dragOffset.x
+//         const newTop = e.clientY - dragOffset.y
+
+//         handleResize(room.id, { x: newLeft, y: newTop })
+//     }
+
+//     const handleMouseUp = () => {
+//         setIsDragging(false)
+//         setIsScaling(false)
+//     }
+
+//     const [isScaling, setIsScaling] = useState(false)
+//     const [scaleOffset, setScaleOffset] = useState({ x: 0, y: 0 })
+
+//     const handleScaleSide = (e) => {
+//         setIsScaling(true)
+//         setScaleOffset({
+//             x: e.clientX,
+//             y: e.clientY
+//         })
+//     }
+
+//     const handleScaling = (e) => {
+//         if (!isScaling) return
+
+//         if (e.target.className === 'up-arrow') {
+            
+//         } else if (e.target.className === 'left-arrow') {
+//             const newLeft = e.clientX - scaleOffset.x
+//             handleResize(room.id, { x: newLeft })
+//         } else if (e.target.className === 'right-arrow') {
+    
+//         } else if (e.target.className === 'down-arrow') {
+//         }
+//     }
+
+//     return (
+//         <div className="room-container">
+//             <div className="room"
+//                 ref={divRef}
+//                 style={{
+//                     width: room.width,
+//                     height: room.height,
+//                     left: room.x,
+//                     top: room.y,
+//                     // cursor: 'move'
+//                 }}
+//                 onMouseOver={() => setIsEditing(true)}
+//                 onMouseOut={() => setIsEditing(false)}
+//             >
+//                 {isEditing ? 
+//                     <div>
+//                         <div className="up-arrow"
+//                             onMouseDown={handleScaleSide}
+//                             onMouseMove={handleScaling}
+//                             onMouseUp={handleMouseUp}
+//                         >
+//                             up
+//                         </div>
+//                         <div className="left-arrow"
+//                             onMouseDown={handleScaleSide}
+//                             onMouseMove={handleScaling}
+//                             onMouseUp={handleMouseUp}
+//                         >
+//                             left
+//                         </div>
+//                         <div className="move-arrow"
+//                             onMouseDown={handleMouseDown}
+//                             onMouseMove={handleMouseMove}
+//                             onMouseUp={handleMouseUp}
+//                         >
+//                             move
+//                         </div>
+//                         <div className="right-arrow"
+//                             onMouseDown={handleScaleSide}
+//                             onMouseMove={handleScaling}
+//                             onMouseUp={handleMouseUp}
+//                         >
+//                             right
+//                         </div>
+//                         <div className="down-arrow"
+//                             onMouseDown={handleScaleSide}
+//                             onMouseMove={handleScaling}
+//                             onMouseUp={handleMouseUp}
+//                         >
+//                             down
+//                         </div>
+//                     </div>
+//                     :
+//                     ''
+//                 }
+//             </div>
+//         </div>
+//     )
+// }
+
+// export default Room
+
+// const handleScaling = (e) => {
+//     if (!isScaling) return
+
+//     if (e.target.className === 'up-arrow') {
+//         // const distanceToEdge = roomDimensions.top - e.clientY
+//         // // console.log(distanceToEdge + e.clientY)
+//         // // console.log(distanceToEdge)
+//         // handleResize(room.id, { y: distanceToEdge + e.clientY - scaleOffset.y})
+//         // console.log(scaleOffset)
+        
+        
+//         // const newTop = e.clientY - scaleOffset.y
+
+//         // if (newTop > 0) {
+//         //     // If positive, make it negative
+//         //     setHeightChange(-newTop);
+//         //   } else {
+//         //     // If negative (or zero), make it positive
+//         //     setHeightChange(Math.abs(newTop));
+//         // }
+
+//         // const newHeight = (heightChange) + +room.height
+//         // handleResize(room.id, { height: newHeight })
+//         // // console.log(roomDimensions.top + +newHeight)
+//         // // console.log(room)
+//     } else if (e.target.className === 'left-arrow') {
+//         const newLeft = e.clientX - scaleOffset.x
+//         handleResize(room.id, { x: newLeft })
+//     } else if (e.target.className === 'right-arrow') {
+//         // const distanceToEdge = roomDimensions.right - e.clientX
+//         // const newWidth = (roomDimensions.right - scaleOffset.x)
+//         // const newRight = e.clientX + distanceToEdge
+//         // handleResize(room.id, { width: newWidth + +room.width, x: newRight })
+//         // console.log(scaleOffset)
+//         // console.log(distanceToEdge)
+//         // console.log(roomDimensions)
+//         // console.log(newWidth)
+//     } else if (e.target.className === 'down-arrow') {
+//         // const distanceToEdge = roomDimensions.bottom - e.clientY
+//         // console.log(distanceToEdge + e.clientY)
+//         // handleResize(room.id, { height: distanceToEdge })
+//     }
+// }
