@@ -40,7 +40,11 @@ function FloorPlan() {
             <div className="floorplan">
                 {/* <div className="room-container"> */}
                     {rooms.map((room) => (
-                        <Room key={room.id} room={room} handleResize={handleResize} isEditing={isEditing} setIsEditing={setIsEditing}/>
+                        <Room key={room.id}
+                            room={room}
+                            handleResize={handleResize}
+                            isEditing={isEditing}
+                            setIsEditing={setIsEditing}/>
                     ))}
                 {/* </div> */}
                 <div className="add-room-plus" onClick={addRoom}><h3>Add Room +</h3></div>

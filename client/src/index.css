@@ -5,8 +5,21 @@
   --text: hsla(0, 0%, 100%, 0.88);
 }
 
+/* font-family: 'Bebas Neue', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+/* font-family: 'Nunito', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap');
+
+/* 400 italic weight nice font for measurements */
+/* font-family: 'Lora', serif; */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
 body {
   text-align: center;
+  font-family: 'Nunito', sans-serif;
+  color: #CED8F7;
+  background-color: #3057E1;
 }
 
 .app-container {
@@ -21,4 +34,20 @@ body {
   flex-direction: column;
   flex-grow: 1;
   /* background-color: brown; */
+}
+
+.grid-container {
+  position: fixed;
+  top: -10%;
+  left: -10%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(2.5%, 1fr));
+  /* grid-template-rows: repeat(auto-fill, minmax(6%, 1fr)); */
+  height: 120%;
+  width: 120%;
+  z-index: -1;
+}
+
+.grid-cell {
+  border: 1px solid #4A6DE5;
 }

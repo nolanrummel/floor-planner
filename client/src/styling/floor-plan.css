@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    background-color: lightblue;
+    /* background-color: lightblue; */
 }
 
 .room-container {
