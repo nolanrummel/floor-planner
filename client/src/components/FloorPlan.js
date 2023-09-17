@@ -6,13 +6,14 @@ import "../styling/floor-plan.css"
 
 function FloorPlan() {
     const [isEditing, setIsEditing] = useState('')
+    const foot = (window.innerWidth * 1.20) / 40
     const [rooms, setRooms] = useState([
         {
             id: 1,
             x: 0,
             y: 0,
-            width: 300,
-            height: 300
+            width: foot * 10,
+            height: foot * 8
         }
     ])
 
