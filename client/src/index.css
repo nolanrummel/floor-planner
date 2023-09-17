@@ -29,6 +29,12 @@ body {
   /* background-color: aquamarine; */
 }
 
+.navbar-spacer {
+  height: 55px;
+  width: 100%;
+  /* background-color: red; */
+}
+
 .content-container {
   display: flex;
   flex-direction: column;

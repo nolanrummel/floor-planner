@@ -19,7 +19,7 @@ const Room = ({ room, handleResize, isEditing, setIsEditing }) => {
 
     return (
         // <div className="room-container">
-            <div className="room"
+            <div className={isEditing ? (isEditing === room.id ? "room" : "inactive-room") : "room"}
                 style={{
                     width: room.width,
                     height: room.height,
