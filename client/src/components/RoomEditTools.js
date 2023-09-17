@@ -22,6 +22,7 @@ function RoomEditTools(
     const [initialMousePosition, setInitialMousePosition] = useState({ x: 0, y: 0 })
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
     const [hoveringArrows, setHoveringArrows] = useState('')
+    const [scaleDirection, setScaleDirection] = useState('')
     const [deleteInterface, setDeleteInterface] = useState(false)
 
     const handleMouseDown = (e) => {
@@ -32,8 +33,10 @@ function RoomEditTools(
         })
     }
 
-    const handleScaleSide = (e) => {
+    const handleScaleSide = (e, direction) => {
         setIsScaling(true)
+        setScaleDirection(direction)
+
         setInitialMousePosition({
             x: e.clientX,
             y: e.clientY
@@ -56,36 +59,31 @@ function RoomEditTools(
             const deltaX = e.clientX - initialMousePosition.x
             const deltaY = e.clientY - initialMousePosition.y
 
-            if (e.target.className === 'up-arrow-container') {
-                const newHeight = initialDimensions.height - deltaY
-                handleResize(room.id, { height: newHeight, y: deltaY - room.y })
-            } else if (e.target.className === 'left-arrow-container') {
-                const newWidth = initialDimensions.width - deltaX
-                handleResize(room.id, { width: newWidth, x: deltaX - room.x })
-            } else if (e.target.className === 'right-arrow-container') {
-                const newWidth = initialDimensions.width + deltaX
-                handleResize(room.id, { width: newWidth, x: deltaX - room.x })
-            } else if (e.target.className === 'down-arrow-container') {
-                const newHeight = initialDimensions.height + deltaY
-                handleResize(room.id, { height: newHeight, y: deltaY - room.y })
-            }
+            const topHeight = initialDimensions.height - deltaY
+            const leftWidth = initialDimensions.width - deltaX
+            const rightWidth = initialDimensions.width + deltaX
+            const bottomHeight = initialDimensions.height + deltaY
 
-            if (hoveringArrows === 'top left') {
-                const newHeight = initialDimensions.height - deltaY
-                const newWidth = initialDimensions.width - deltaX
-                handleResize(room.id, { height: newHeight, y: deltaY - room.y, width: newWidth, x: deltaX - room.x })
-            } else if (hoveringArrows === 'top right') {
-                const newHeight = initialDimensions.height - deltaY
-                const newWidth = initialDimensions.width + deltaX
-                handleResize(room.id, { height: newHeight, y: deltaY - room.y, width: newWidth, x: deltaX - room.x })
-            } else if (hoveringArrows === 'bottom left') {
-                const newHeight = initialDimensions.height + deltaY
-                const newWidth = initialDimensions.width - deltaX
-                handleResize(room.id, { height: newHeight, y: deltaY - room.y, width: newWidth, x: deltaX - room.x })
-            } else if (hoveringArrows === 'bottom right') {
-                const newHeight = initialDimensions.height + deltaY
-                const newWidth = initialDimensions.width + deltaX
-                handleResize(room.id, { height: newHeight, y: deltaY - room.y, width: newWidth, x: deltaX - room.x })
+            if (scaleDirection === 'top') {
+                handleResize(room.id, { height: topHeight, y: deltaY - room.y })
+            } else if (scaleDirection === 'left') {
+                handleResize(room.id, { width: leftWidth, x: deltaX - room.x })
+            } else if (scaleDirection === 'right') {
+                handleResize(room.id, { width: rightWidth, x: deltaX - room.x })
+            } else if (scaleDirection === 'bottom') {
+                handleResize(room.id, { height: bottomHeight, y: deltaY - room.y })
+            } else if (scaleDirection === 'top left') {
+                handleResize(room.id, { height: topHeight, y: deltaY - room.y,
+                    width: leftWidth, x: deltaX - room.x })
+            } else if (scaleDirection === 'top right') {
+                handleResize(room.id, { height: topHeight, y: deltaY - room.y,
+                    width: rightWidth, x: deltaX - room.x })
+            } else if (scaleDirection === 'bottom left') {
+                handleResize(room.id, { height: bottomHeight, y: deltaY - room.y,
+                    width: leftWidth, x: deltaX - room.x })
+            } else if (scaleDirection === 'bottom right') {
+                handleResize(room.id, { height: bottomHeight, y: deltaY - room.y,
+                    width: rightWidth, x: deltaX - room.x })
             }
         }
     }
@@ -97,12 +95,17 @@ function RoomEditTools(
     return (
         <div>
             {isHovering ?
-                <div>
+                <div style={ isDragging ?
+                        { padding: '500px', height: room.height, width: room.width }
+                        :
+                        { height: room.height, width: room.width }
+                    }
+                    onMouseMove={handleMouseMove}
+                    >
                     <div className="arrows-top-row">
                         <div className="scale-top-left">
                             <div className="scale-top-left-control"
-                                onMouseDown={handleScaleSide}
-                                onMouseMove={handleMouseMove}
+                                onMouseDown={(e) => handleScaleSide(e, 'top left')}
                                 onMouseEnter={() => {setHoveringArrows('top left')}}
                                 onMouseLeave={() => {setHoveringArrows('')}}>
                                     <h3 className="up-left-arrow">〈</h3>
@@ -111,8 +114,7 @@ function RoomEditTools(
                         <div className="top-arrow-lockup">
                             <div className="top-spacer"></div>
                             <div className="up-arrow-container"
-                                onMouseDown={handleScaleSide}
-                                onMouseMove={handleMouseMove}>
+                                onMouseDown={(e) => handleScaleSide(e, 'top')}>
                                     {hoveringArrows.includes('top') ?
                                         <h3 className="up-arrow-active">〈</h3>
                                         :
@@ -122,8 +124,7 @@ function RoomEditTools(
                         </div>
                         <div className="scale-top-right">
                             <div className="scale-top-right-control"
-                                onMouseDown={handleScaleSide}
-                                onMouseMove={handleMouseMove}
+                                onMouseDown={(e) => handleScaleSide(e, 'top right')}
                                 onMouseEnter={() => {setHoveringArrows('top right')}}
                                 onMouseLeave={() => {setHoveringArrows('')}}>
                                     <h3 className="up-right-arrow">〈</h3>
@@ -134,8 +135,7 @@ function RoomEditTools(
                         <div className="left-arrow-lockup">
                             <div className="left-spacer"></div>
                             <div className="left-arrow-container"
-                                onMouseDown={handleScaleSide}
-                                onMouseMove={handleMouseMove}>
+                                onMouseDown={(e) => handleScaleSide(e, 'left')}>
                                     {hoveringArrows.includes('left') ?
                                         <h3 className="left-arrow-active">〈</h3>
                                         :
@@ -161,7 +161,6 @@ function RoomEditTools(
                                     <div className="center-buttons-lockup">
                                         <div className="move-arrow"
                                             onMouseDown={handleMouseDown}
-                                            onMouseMove={handleMouseMove}
                                             >move
                                         </div>
                                         <div onClick={() => setIsEditing(room.id)}>wall</div>
@@ -172,8 +171,7 @@ function RoomEditTools(
                         </div>
                         <div className="right-arrow-lockup">
                             <div className="right-arrow-container"
-                                onMouseDown={handleScaleSide}
-                                onMouseMove={handleMouseMove}>
+                                onMouseDown={(e) => handleScaleSide(e, 'right')}>
                                     {hoveringArrows.includes('right') ?
                                         <h3 className="right-arrow-active">〈</h3>
                                         :
@@ -186,8 +184,7 @@ function RoomEditTools(
                     <div className="arrows-bottom-row">
                         <div className="scale-bottom-left">
                             <div className="scale-bottom-left-control"
-                                onMouseDown={handleScaleSide}
-                                onMouseMove={handleMouseMove}
+                                onMouseDown={(e) => handleScaleSide(e, 'bottom left')}
                                 onMouseEnter={() => {setHoveringArrows('bottom left')}}
                                 onMouseLeave={() => {setHoveringArrows('')}}>
                                     <h3 className="down-left-arrow">〈</h3>
@@ -195,8 +192,7 @@ function RoomEditTools(
                         </div>
                         <div className="bottom-arrow-lockup">
                             <div className="down-arrow-container"
-                                onMouseDown={handleScaleSide}
-                                onMouseMove={handleMouseMove}>
+                                onMouseDown={(e) => handleScaleSide(e, 'bottom')}>
                                     {hoveringArrows.includes('bottom') ?
                                         <h3 className="down-arrow-active">〈</h3>
                                         :
@@ -207,8 +203,7 @@ function RoomEditTools(
                         </div>
                         <div className="scale-bottom-right">
                             <div className="scale-bottom-right-control"
-                                onMouseDown={handleScaleSide}
-                                onMouseMove={handleMouseMove}
+                                onMouseDown={(e) => handleScaleSide(e, 'bottom right')}
                                 onMouseEnter={() => {setHoveringArrows('bottom right')}}
                                 onMouseLeave={() => {setHoveringArrows('')}}>
                                     <h3 className="down-right-arrow">〈</h3>

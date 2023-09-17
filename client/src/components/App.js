@@ -50,6 +50,7 @@ function App() {
         <div>
           <Navbar />
         </div>
+        <div className="navbar-spacer"></div>
         <div className="content-container">
           <Switch>
             <Route exact path="/">

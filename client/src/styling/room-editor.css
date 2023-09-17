@@ -7,6 +7,15 @@
     background-color: #4A6DE5;
 }
 
+.inactive-room {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: 5px solid #4A6DE5;
+    background-color: #3057E1;
+}
+
 .arrows-top-row {
     position: absolute;
     display: flex;
@@ -34,8 +43,20 @@
 }
 
 .scale-top-left-control:hover .up-left-arrow {
-    transform: rotate(45deg) scale(1.5);
+    animation: upLeftArrow 1.25s ease infinite;
     opacity: 1;
+}
+
+@keyframes upLeftArrow {
+    0% {
+        transform: translateY(0) rotate(45deg);
+    }
+    20% {
+        transform: translateY(-6px) translateX(-6px) rotate(45deg) scale(1.5);
+    }
+    100% {
+        transform: translateY(0) rotate(45deg);
+    }
 }
 
 .up-left-arrow {
@@ -73,8 +94,20 @@
 }
 
 .up-arrow-container:hover .up-arrow {
-    transform: rotate(90deg) scale(1.5);
+    animation: upArrow 1.25s ease infinite;
     opacity: 1;
+}
+
+@keyframes upArrow {
+    0% {
+        transform: translateY(0) rotate(90deg);
+    }
+    20% {
+        transform: translateY(-10px) rotate(90deg) scale(1.5);
+    }
+    100% {
+        transform: translateY(0) rotate(90deg);
+    }
 }
 
 .up-arrow {
@@ -89,8 +122,10 @@
 .up-arrow-active {
     opacity: 1;
     margin-bottom: 7px;
-    transform: rotate(90deg) scale(1.5);
-    transition: transform 0.3s ease-in-out;
+    transform: rotate(90deg);
+    animation: upArrow 1.25s ease infinite;
+    user-select: none;
+    pointer-events: none;
 }
 
 .scale-top-right {
@@ -111,8 +146,20 @@
 }
 
 .scale-top-right-control:hover .up-right-arrow {
-    transform: rotate(135deg) scale(1.5);
+    animation: upRightArrow 1.25s ease infinite;
     opacity: 1;
+}
+
+@keyframes upRightArrow {
+    0% {
+        transform: translateY(0) rotate(135deg);
+    }
+    20% {
+        transform: translateY(-6px) translateX(6px) rotate(135deg) scale(1.5);
+    }
+    100% {
+        transform: translateY(0) rotate(135deg);
+    }
 }
 
 .up-right-arrow {
@@ -160,8 +207,20 @@
 }
 
 .left-arrow-container:hover .left-arrow {
-    transform: scale(1.5);
+    animation: leftArrow 1.25s ease infinite;
     opacity: 1;
+}
+
+@keyframes leftArrow {
+    0% {
+        transform: translateY(0);
+    }
+    20% {
+        transform: translateX(-10px) scale(1.5);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .left-arrow {
@@ -172,8 +231,9 @@
 }
 
 .left-arrow-active {
-    transform: scale(1.5);
-    transition: transform 0.3s ease-in-out;
+    animation: leftArrow 1.25s ease infinite;
+    user-select: none;
+    pointer-events: none;
 }
 
 .arrows-center-center {
@@ -217,8 +277,20 @@
 }
 
 .right-arrow-container:hover .right-arrow {
-    transform: rotate(180deg) scale(1.5);
+    animation: rightArrow 1.25s ease infinite;
     opacity: 1;
+}
+
+@keyframes rightArrow {
+    0% {
+        transform: translateY(0) rotate(180deg);
+    }
+    20% {
+        transform: translateX(10px) rotate(180deg) scale(1.5);
+    }
+    100% {
+        transform: translateY(0) rotate(180deg);
+    }
 }
 
 .right-arrow {
@@ -230,8 +302,10 @@
 }
 
 .right-arrow-active {
-    transform: rotate(180deg) scale(1.5);
-    transition: transform 0.3s ease-in-out;
+    transform: rotate(180deg);
+    animation: rightArrow 1.25s ease infinite;
+    user-select: none;
+    pointer-events: none;
 }
 
 .right-spacer {
@@ -267,8 +341,20 @@
 }
 
 .scale-bottom-left-control:hover .down-left-arrow {
-    transform: rotate(315deg) scale(1.5);
+    animation: downLeftArrow 1.25s ease infinite;
     opacity: 1;
+}
+
+@keyframes downLeftArrow {
+    0% {
+        transform: translateY(0) rotate(315deg);
+    }
+    20% {
+        transform: translateY(6px) translateX(-6px) rotate(315deg) scale(1.5);
+    }
+    100% {
+        transform: translateY(0) rotate(315deg);
+    }
 }
 
 .down-left-arrow {
@@ -306,8 +392,20 @@
 }
 
 .down-arrow-container:hover .down-arrow {
-    transform: rotate(270deg) scale(1.5);
+    animation: downArrow 1.25s ease infinite;
     opacity: 1;
+}
+
+@keyframes downArrow {
+    0% {
+        transform: translateY(0) rotate(270deg);
+    }
+    20% {
+        transform: translateY(10px) rotate(270deg) scale(1.5);
+    }
+    100% {
+        transform: translateY(0) rotate(270deg);
+    }
 }
 
 .down-arrow {
@@ -321,8 +419,10 @@
 
 .down-arrow-active {
     margin-top: 7px;
-    transform: rotate(270deg) scale(1.5);
+    animation: downArrow 1.25s ease infinite;
     transition: transform 0.3s ease-in-out;
+    user-select: none;
+    pointer-events: none;
 }
 
 .scale-bottom-right {
@@ -343,8 +443,20 @@
 }
 
 .scale-bottom-right-control:hover .down-right-arrow {
-    transform: rotate(225deg) scale(1.5);
+    animation: downRightArrow 1.25s ease infinite;
     opacity: 1;
+}
+
+@keyframes downRightArrow {
+    0% {
+        transform: translateY(0) rotate(225deg);
+    }
+    20% {
+        transform: translateY(6px) translateX(6px) rotate(225deg) scale(1.5);
+    }
+    100% {
+        transform: translateY(0) rotate(225deg);
+    }
 }
 
 .down-right-arrow {
