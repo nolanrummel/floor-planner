@@ -4,52 +4,37 @@ import React, { useState } from "react"
 import Room from "./Room"
 import "../styling/floor-plan.css"
 
-function FloorPlan() {
-    const [isEditing, setIsEditing] = useState('')
-    const foot = (window.innerWidth * 1.20) / 40
-    const [rooms, setRooms] = useState([
-        {
-            id: 1,
+function FloorPlan() {    
+    const [rooms, setRooms] = useState([createRoom(1)])
+    const [isEditing, setIsEditing] = useState(false)
+
+    function createRoom(id) {
+        const foot = (window.innerWidth * 1.20) / 40
+        return {
+            id,
             x: 0,
             y: 0,
             width: foot * 10,
             height: foot * 8
         }
-    ])
+      }
 
-    const handleResize = (id, newDimensions) => {
-        const updatedRooms = rooms.map((room) => room.id === id ?
-            {...room, ...newDimensions}
-            :
-            room
-        )
-        setRooms(updatedRooms)
-    }
-
-    const addRoom = () => {
-        setRooms([...rooms, {
-            id: rooms.length + 1,
-            x: 0,
-            y: 0,
-            width: 300,
-            height: 300
-        }])
-    }
+      const addRoom = () => {
+        const newRoom = createRoom(rooms.length + 1)
+        setRooms([...rooms, newRoom])
+      }
 
     return (
         <div className="floorplan-container">
-            <div className="floorplan">
-                {/* <div className="room-container"> */}
-                    {rooms.map((room) => (
-                        <Room key={room.id}
-                            room={room}
-                            handleResize={handleResize}
-                            isEditing={isEditing}
-                            setIsEditing={setIsEditing}/>
-                    ))}
-                {/* </div> */}
-                <div className="add-room-plus" onClick={addRoom}><h3>Add Room +</h3></div>
-            </div>
+            {rooms.map((room) => (
+                <Room 
+                    key={room.id}
+                    room={room}
+                    isEditing={isEditing}
+                    setIsEditing={setIsEditing}
+                />
+            ))}
+            <div className="add-room-plus" onClick={addRoom}><h3>Add Room +</h3></div>
         </div>
     )
 }

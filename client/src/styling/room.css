@@ -1,0 +1,56 @@
+.react-draggable-dragging {
+    transform: none !important;
+}
+
+.anchor-point {
+    fill: #002082;
+    r: 10;
+    /* transition: r 0.3s ease-in-out; */
+}
+
+.anchor-point:hover {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        r: 10;
+    }
+    25% {
+        r: 15
+    }
+    100% {
+        r: 10;
+    }
+}
+
+.room-lockup {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: chocolate; */
+}
+
+.active-room {
+    fill: #4A6DE5;
+    stroke: #CED8F7;
+    stroke-width: 5px;
+    overflow: visible;
+    z-index: 1;
+    /* background-color: lightpink; */
+}
+
+.inactive-room {
+    fill: #3057E1;
+    stroke: #4A6DE5;
+    stroke-width: 5px;
+    overflow: visible;
+    z-index: 0;
+    /* background-color: lightpink; */
+}
+
+.edit-options {
+    position: absolute;
+    z-index: 10;
+}

@@ -1,21 +1,11 @@
 .floorplan-container {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.floorplan {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     position: relative;
-    /* background-color: lightblue; */
-}
-
-.room-container {
-    /* grid-auto-flow: dense; */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    /* background-color: brown; */
 }
 
 .add-room-plus {
