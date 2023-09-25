@@ -11,14 +11,6 @@ function Navbar() {
         onMouseEnter={() => setTitleHover(true)}
         onMouseLeave={() => setTitleHover(false)}>
         <div className="nav-left-side">
-            {/* <h2 className="title">floor planner</h2> */}
-            {/* <div className="title-lockup">
-                {titleHover ? <h2 className="fl">fl</h2> : ''}
-                <h2 className="oo">OO</h2>
-                {titleHover ? <h2 className="r">r</h2> : ''}
-                <h2 className="nn">NN</h2>
-                {titleHover ? <h2 className="er">er</h2> : ''}
-            </div> */}
             <div className="title-lockup">
                 <h2 className="fl">Fl</h2>
                 <h2 className="oo">OO</h2>

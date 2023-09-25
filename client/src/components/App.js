@@ -6,7 +6,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import Navbar from "./Navbar"
 import Home from "./Home"
 import FloorPlan from "./FloorPlan"
+import Development from "./Development"
 import NotFound from "./NotFound"
+import DevFloorPlan from "./DevFloorPlan"
 
 function App() {
   //sets logged in user info
@@ -58,6 +60,9 @@ function App() {
             </Route>
             <Route exact path="/floorplan">
               <FloorPlan />
+            </Route>
+            <Route exact path="/oldfloorplan">
+              <DevFloorPlan />
             </Route>
             <Route path="*">
               <NotFound />
