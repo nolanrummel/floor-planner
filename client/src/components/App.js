@@ -5,10 +5,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 //local imports
 import Navbar from "./Navbar"
 import Home from "./Home"
-import FloorPlan from "./FloorPlan"
-import Development from "./Development"
+import FloorPlan from "./floorplan/FloorPlan"
 import NotFound from "./NotFound"
-import DevFloorPlan from "./DevFloorPlan"
 
 function App() {
   //sets logged in user info
@@ -60,9 +58,6 @@ function App() {
             </Route>
             <Route exact path="/floorplan">
               <FloorPlan />
-            </Route>
-            <Route exact path="/oldfloorplan">
-              <DevFloorPlan />
             </Route>
             <Route path="*">
               <NotFound />
