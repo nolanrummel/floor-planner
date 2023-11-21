@@ -55,6 +55,28 @@ function RoomSVG({ anchors, room, isEditing, editState, mouseEvent, click }) {
     setPath(`${pathString} Z`)
   }
 
+  const addToPath = (newAnchor) => {
+    //checks if newAnchor already exists at a current coord
+    const existingAnchor = anchors.some(obj => obj.x === newAnchor.x && obj.y === newAnchor.y)
+
+    if (!existingAnchor) {
+      //handles case of last anchor
+      if (ghostLine.indexes[0] == anchors.length - 1 || ghostLine.indexes[ghostLine.indexes.length - 1] == anchors.length - 1) {
+        //adds new anchor to end rather than splicing
+        anchors.push(newAnchor)
+        pathFormatter(anchors)
+      } else {
+        //adds newAnchor to anchors
+        anchors.splice(ghostLocation.index + 1, 0, newAnchor)
+        //re-formats anchors into svg path
+        pathFormatter(anchors)
+      }
+    }
+
+    //include a filter to remove repeating anchors at the end of new function
+    console.log(anchors)
+  }
+
   //adds points to svg path, renders on click
   useEffect(() => {
     //handles horizontal lines
@@ -66,53 +88,19 @@ function RoomSVG({ anchors, room, isEditing, editState, mouseEvent, click }) {
         y: anchors[ghostLocation.index].y
       }
 
-      //SHORTEN THIS TO A FUNCTION TO CALL X3 BELOW
-      //checks if newAnchor already exists at a current coord
-      const existingAnchor = anchors.some(obj => obj.x === newAnchor.x && obj.y === newAnchor.y)
-
-      if (!existingAnchor) {
-        //adds newAnchor to anchors
-        anchors.splice(ghostLocation.index + 1, 0, newAnchor)
-        //re-formats anchors into svg path
-        pathFormatter(anchors)
-      }
+      addToPath(newAnchor) 
     } //handles vertical lines
     else if (ghostLine.direction === 'vert') {
-      //handles case of last anchor
-      if (ghostLine.indexes[0] == anchors.length - 1 || ghostLine.indexes[ghostLine.indexes.length - 1] == anchors.length - 1) {
-        const newAnchor = {
-            x: anchors[ghostLocation.index].x,
-            y: parseFloat(ghostLocation.top) + 13
-        }
-
-        //checks if newAnchor already exists at a current coord
-        const existingAnchor = anchors.some(obj => obj.x === newAnchor.x && obj.y === newAnchor.y)
-
-        if (!existingAnchor) {
-          //adds new anchor to end rather than splicing
-          anchors.push(newAnchor)
-          pathFormatter(anchors)
-        }
-      } else {
-        const newAnchor = {
-            x: anchors[ghostLocation.index].x,
-            y: parseFloat(ghostLocation.top) + 13
-        }
-
-        //checks if newAnchor already exists at a current coord
-        const existingAnchor = anchors.some(obj => obj.x === newAnchor.x && obj.y === newAnchor.y)
-
-        if (!existingAnchor) {
-          anchors.splice(ghostLocation.index + 1, 0, newAnchor)
-          pathFormatter(anchors)
-        }
+      const newAnchor = {
+        x: anchors[ghostLocation.index].x,
+        y: parseFloat(ghostLocation.top) + 13
       }
+
+      addToPath(newAnchor)
     }
     //resets the ghost line info
     setGhostLine({})
   }, [click])
-
-  console.log(path)
 
   return (
     <div>
